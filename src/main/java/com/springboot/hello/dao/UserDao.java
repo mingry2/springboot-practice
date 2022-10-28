@@ -1,6 +1,6 @@
 package com.springboot.hello.dao;
 
-import com.springboot.hello.domain.dao.User;
+import com.springboot.hello.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -30,13 +30,13 @@ public class UserDao {
         }
     };
 
-    public void add(User user) throws SQLException {
-        jdbcTemplate.update("INSERT INTO users(id, name, password) VALUES(?, ?, ?)",
+    public int add(User user) {
+        return this.jdbcTemplate.update("INSERT INTO users(id, name, password) VALUES(?, ?, ?)",
                 user.getId(), user.getName(), user.getPassword());
     }
 
-    public void deleteAll() {
-        jdbcTemplate.update("delete from users");
+    public int deleteAll() { // p14 수업로그 확인
+        return this.jdbcTemplate.update("delete from users");
     }
 
     public int getCount() throws SQLException {
